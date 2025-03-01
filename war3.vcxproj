@@ -65,6 +65,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)3rd\Detours\libs\x86</AdditionalLibraryDirectories>
       <AdditionalDependencies>detours.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <BaseAddress>0x400000</BaseAddress>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,6 +87,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)3rd\Detours\libs\x86</AdditionalLibraryDirectories>
       <AdditionalDependencies>detours.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <BaseAddress>0x400000</BaseAddress>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
