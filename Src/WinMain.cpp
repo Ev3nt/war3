@@ -4,7 +4,9 @@
 
 #include "War3.h"
 
-int WINAPI WinMain(HINSTANCE instance, HINSTANCE instancePrev, LPSTR cmdLine, int cmdShow) {
+#pragma warning(disable: 28251)
+
+BOOL WINAPI WinMain(HINSTANCE instance, HINSTANCE instancePrev, LPSTR cmdLine, int cmdShow) {
 	try {
 #ifdef IRINABOT
 		SetCurrentDirectory(Utils::getEnv("GamePath").data());
