@@ -45,10 +45,12 @@ War3::War3() {
 		return;
 	}
 
+#ifdef IRINABOT
 	HMODULE mss32Base = GetModuleHandle("mss32.dll");
 	if (mss32Base) {
 		HookManager::Attach(GetProcAddress(mss32Base, "_AIL_startup@0"), War3::AIL_startup);
 	}
+#endif
 
 	PIMAGE_NT_HEADERS ntHeader = (PIMAGE_NT_HEADERS)((DWORD)gameBase_ + ((PIMAGE_DOS_HEADER)gameBase_)->e_lfanew);
 	PIMAGE_OPTIONAL_HEADER optionalHeader = &ntHeader->OptionalHeader;
@@ -87,6 +89,7 @@ DWORD WINAPI War3::SetSecurityInfo(HANDLE handle, SE_OBJECT_TYPE ObjectType, SEC
 	return ERROR_SUCCESS;
 }
 
+#ifdef IRINABOT
 DWORD WINAPI War3::AIL_startup() {
 	std::vector<std::string> libraries = Utils::slice(Utils::getEnv("DelayLibraries"), ';');
 	for (const auto& library : libraries) {
@@ -95,6 +98,7 @@ DWORD WINAPI War3::AIL_startup() {
 
 	return HookManager::Invoke(War3::AIL_startup);
 }
+#endif
 
 BOOL APIENTRY War3::DllMain(HMODULE module, UINT reason, LPVOID reserved) {
 	if (reason == DLL_PROCESS_DETACH) {

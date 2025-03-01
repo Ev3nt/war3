@@ -21,7 +21,9 @@ private:
 	static DWORD WINAPI GetModuleFileNameA(HMODULE hModule, LPSTR lpFilename, DWORD nSize);
 	static DWORD WINAPI SetSecurityInfo(HANDLE handle, SE_OBJECT_TYPE ObjectType, SECURITY_INFORMATION SecurityInfo, PSID psidOwner, PSID psidGroup, PACL pDacl, PACL pSacl);
 
+#ifdef IRINABOT
 	static DWORD WINAPI AIL_startup();
+#endif
 
 	static BOOL APIENTRY DllMain(HMODULE module, UINT reason, LPVOID reserved);
 
