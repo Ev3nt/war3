@@ -64,7 +64,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)3rd\Detours\libs\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>detours.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,15 +84,31 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)3rd\Detours\libs\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>detours.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\d3d8to9\d3d8to9.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8to9_base.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8to9_device.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8to9_index_buffer.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8to9_surface.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8to9_swap_chain.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8to9_texture.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8to9_vertex_buffer.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8to9_volume.cpp" />
+    <ClCompile Include="Src\d3d8to9\d3d8types.cpp" />
+    <ClCompile Include="Src\d3d8to9\interface_query.cpp" />
     <ClCompile Include="Src\Utils.cpp" />
     <ClCompile Include="Src\War3.cpp" />
     <ClCompile Include="Src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\d3d8to9\d3d8.hpp" />
+    <ClInclude Include="Src\d3d8to9\d3d8to9.hpp" />
+    <ClInclude Include="Src\d3d8to9\d3d8types.hpp" />
+    <ClInclude Include="Src\d3d8to9\d3dx9.hpp" />
+    <ClInclude Include="Src\d3d8to9\interface_query.hpp" />
     <ClInclude Include="Src\resource.h" />
     <ClInclude Include="Src\function.h" />
     <ClInclude Include="Src\HookManager.h" />

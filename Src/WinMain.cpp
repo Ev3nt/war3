@@ -1,6 +1,9 @@
 #include <Windows.h>
 
+#include "HookManager.h"
 #include "Utils.h"
+
+#include "d3d8to9/d3d8to9.hpp"
 
 #include "War3.h"
 
@@ -17,6 +20,11 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE instancePrev, LPSTR cmdLine, in
 			LoadLibrary(Utils::trim(library).data());
 		}
 	#endif IRINABOT
+
+		HMODULE d3d8Base = LoadLibrary("d3d8.dll");
+		if (d3d8Base) {
+			HookManager::Attach(GetProcAddress(d3d8Base, "Direct3DCreate8"), Direct3DCreate8);
+		}
 
 		war3.run();
 	}
