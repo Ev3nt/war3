@@ -30,7 +30,9 @@ War3::War3() {
 	SFileOpen("Test Archive.mpq", 9, 0, &mpq);*/
 
 	HookManager::Attach(::GetModuleFileNameA, War3::GetModuleFileNameA);
+#ifdef IRINABOT
 	HookManager::Attach(::SetSecurityInfo, War3::SetSecurityInfo);
+#endif
 
 	gameBase_ = LoadLibrary((gamePath + "game.dll").data());
 	if (!gameBase_) {
@@ -85,11 +87,11 @@ DWORD WINAPI War3::GetModuleFileNameA(HMODULE hModule, LPSTR lpFilename, DWORD n
 	return HookManager::Invoke(War3::GetModuleFileNameA, hModule, lpFilename, nSize);
 }
 
+#ifdef IRINABOT
 DWORD WINAPI War3::SetSecurityInfo(HANDLE handle, SE_OBJECT_TYPE ObjectType, SECURITY_INFORMATION SecurityInfo, PSID psidOwner, PSID psidGroup, PACL pDacl, PACL pSacl) {
 	return ERROR_SUCCESS;
 }
 
-#ifdef IRINABOT
 DWORD WINAPI War3::AIL_startup() {
 	std::vector<std::string> libraries = Utils::slice(Utils::getEnv("DelayLibraries"), ';');
 	for (const auto& library : libraries) {
