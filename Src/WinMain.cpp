@@ -11,10 +11,12 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE instancePrev, LPSTR cmdLine, in
 #endif
 		War3& war3 = War3::getInstance();
 
-		/*std::vector<std::string> libraries = Utils::slice(Utils::getEnv("Libraries"), ';');
+#ifdef IRINABOT
+		std::vector<std::string> libraries = Utils::slice(Utils::getEnv("Libraries"), ';');
 		for (const auto& library : libraries) {
 			LoadLibrary(Utils::trim(library).data());
-		}*/
+		}
+	#endif IRINABOT
 
 		war3.run();
 	}
