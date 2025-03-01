@@ -19,9 +19,11 @@ private:
 
 	//static BOOL WINAPI _CRT_INIT(HMODULE module, UINT reason, LPVOID reserved);
 	static DWORD WINAPI GetModuleFileNameA(HMODULE hModule, LPSTR lpFilename, DWORD nSize);
+#ifdef IRINABOT
 	static DWORD WINAPI SetSecurityInfo(HANDLE handle, SE_OBJECT_TYPE ObjectType, SECURITY_INFORMATION SecurityInfo, PSID psidOwner, PSID psidGroup, PACL pDacl, PACL pSacl);
 
 	static DWORD WINAPI AIL_startup();
+#endif
 
 	static BOOL APIENTRY DllMain(HMODULE module, UINT reason, LPVOID reserved);
 

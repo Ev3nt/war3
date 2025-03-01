@@ -30,7 +30,9 @@ War3::War3() {
 	SFileOpen("Test Archive.mpq", 9, 0, &mpq);*/
 
 	HookManager::Attach(::GetModuleFileNameA, War3::GetModuleFileNameA);
+#ifdef IRINABOT
 	HookManager::Attach(::SetSecurityInfo, War3::SetSecurityInfo);
+#endif
 
 	gameBase_ = LoadLibrary((gamePath + "game.dll").data());
 	if (!gameBase_) {
@@ -45,10 +47,12 @@ War3::War3() {
 		return;
 	}
 
+#ifdef IRINABOT
 	HMODULE mss32Base = GetModuleHandle("mss32.dll");
 	if (mss32Base) {
 		HookManager::Attach(GetProcAddress(mss32Base, "_AIL_startup@0"), War3::AIL_startup);
 	}
+#endif
 
 	PIMAGE_NT_HEADERS ntHeader = (PIMAGE_NT_HEADERS)((DWORD)gameBase_ + ((PIMAGE_DOS_HEADER)gameBase_)->e_lfanew);
 	PIMAGE_OPTIONAL_HEADER optionalHeader = &ntHeader->OptionalHeader;
@@ -83,6 +87,7 @@ DWORD WINAPI War3::GetModuleFileNameA(HMODULE hModule, LPSTR lpFilename, DWORD n
 	return HookManager::Invoke(War3::GetModuleFileNameA, hModule, lpFilename, nSize);
 }
 
+#ifdef IRINABOT
 DWORD WINAPI War3::SetSecurityInfo(HANDLE handle, SE_OBJECT_TYPE ObjectType, SECURITY_INFORMATION SecurityInfo, PSID psidOwner, PSID psidGroup, PACL pDacl, PACL pSacl) {
 	return ERROR_SUCCESS;
 }
@@ -95,6 +100,7 @@ DWORD WINAPI War3::AIL_startup() {
 
 	return HookManager::Invoke(War3::AIL_startup);
 }
+#endif
 
 BOOL APIENTRY War3::DllMain(HMODULE module, UINT reason, LPVOID reserved) {
 	if (reason == DLL_PROCESS_DETACH) {
